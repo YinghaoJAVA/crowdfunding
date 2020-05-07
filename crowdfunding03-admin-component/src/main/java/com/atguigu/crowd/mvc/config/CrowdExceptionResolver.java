@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.AccessForbiddenException;
+import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -17,28 +20,29 @@ import com.google.gson.Gson;
 @ControllerAdvice
 public class CrowdExceptionResolver {
 	
-	@ExceptionHandler(value = ArithmeticException.class)
-	public ModelAndView resolveMathException(
-				ArithmeticException exception,
+	@ExceptionHandler(value = LoginFailedException.class)
+	public ModelAndView resolveLoginFailedException(
+				LoginFailedException exception,
 				HttpServletRequest request,
 				HttpServletResponse response
 			) throws IOException {
-
-		String viewName = "system-error";
-
+	
+		String viewName = "admin-login";
+	
 		return commonResolve(viewName, exception, request, response);
 	}
-	@ExceptionHandler(value = NullPointerException.class)
-	public ModelAndView resolveNullPointerException(
-			NullPointerException exception, 
+	
+	@ExceptionHandler(value = AccessForbiddenException.class)
+	public ModelAndView resolveAccessForbiddenException(
+			AccessForbiddenException exception,
 			HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response
+			) throws IOException {
 		
-		String viewName = "system-error";
-
+		String viewName = "admin-login";
+		
 		return commonResolve(viewName, exception, request, response);
 	}
-
 	
 	// @ExceptionHandler将一个具体的异常类型和一个方法关联起来
 	private ModelAndView commonResolve(
@@ -81,7 +85,7 @@ public class CrowdExceptionResolver {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		// 9.将Exception对象存入模型
-		modelAndView.addObject("exception", exception);
+		modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
 		
 		// 10.设置对应的视图名称
 		modelAndView.setViewName(viewName);
