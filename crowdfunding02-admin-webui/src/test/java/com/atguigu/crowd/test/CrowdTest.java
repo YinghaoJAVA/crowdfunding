@@ -61,7 +61,6 @@ public class CrowdTest {
 		logger.error("Error level!!!");
 	}
 	
-	
 	@Test
 	public void testInsertAdmin() {
 		Admin admin = new Admin(null, "tom", "123123", "汤姆", "tom@qq.com", null);
