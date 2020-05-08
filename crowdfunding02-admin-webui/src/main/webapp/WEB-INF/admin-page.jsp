@@ -25,8 +25,8 @@
 		var properties = {
 			num_edge_entries: 3,								// 边缘页数
 			num_display_entries: 5,								// 主体页数
-			callback: pageSelectCallback,						// 指定用户点击“翻页”的按钮时跳转页面的回调函数
 			load_first_page:false,
+			callback: pageSelectCallback,						// 指定用户点击“翻页”的按钮时跳转页面的回调函数
 			items_per_page: ${requestScope.pageInfo.pageSize},	// 每页要显示的数据的数量
 			current_page: ${requestScope.pageInfo.pageNum - 1},	// Pagination内部使用pageIndex来管理页码，pageIndex从0开始，pageNum从1开始，所以要减一
 			prev_text: "上一页",									// 上一页按钮上显示的文本
