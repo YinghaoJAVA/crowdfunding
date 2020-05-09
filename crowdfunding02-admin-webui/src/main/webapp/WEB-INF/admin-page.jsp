@@ -24,8 +24,8 @@
 		// 声明一个JSON对象存储Pagination要设置的属性
 		var properties = {
 			num_edge_entries: 3,								// 边缘页数
-			num_display_entries: 5,								// 主体页数
 			load_first_page:false,
+			num_display_entries: 5,								// 主体页数
 			callback: pageSelectCallback,						// 指定用户点击“翻页”的按钮时跳转页面的回调函数
 			items_per_page: ${requestScope.pageInfo.pageSize},	// 每页要显示的数据的数量
 			current_page: ${requestScope.pageInfo.pageNum - 1},	// Pagination内部使用pageIndex来管理页码，pageIndex从0开始，pageNum从1开始，所以要减一
@@ -121,9 +121,10 @@
 												<td>${admin.userName }</td>
 												<td>${admin.email }</td>
 												<td>
-													<button type="button" class="btn btn-success btn-xs">
+													<!-- <button type="button" class="btn btn-success btn-xs">
 														<i class=" glyphicon glyphicon-check"></i>
-													</button>
+													</button> -->
+													<a href="assign/to/assign/role/page.html?adminId=${admin.id }&pageNum=${requestScope.pageInfo.pageNum }&keyword=${param.keyword }" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></a>
 													<!-- 旧代码 -->
 													<!-- <button type="button" class="btn btn-primary btn-xs">
 														<i class=" glyphicon glyphicon-pencil"></i>
