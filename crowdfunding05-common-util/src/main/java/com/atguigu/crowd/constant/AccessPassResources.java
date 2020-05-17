@@ -55,7 +55,7 @@ public class AccessPassResources {
 	}
 	
 //	public static void main(String[] args) {
-//		String servletPath = "/css";
+//		String servletPath = "/";
 //		boolean result = judgeCurrentServletPathWetherStaticResource(servletPath);
 //		System.out.println(result);
 //	}
