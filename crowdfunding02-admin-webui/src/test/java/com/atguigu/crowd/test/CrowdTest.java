@@ -2,12 +2,18 @@ package com.atguigu.crowd.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.Role;
@@ -16,8 +22,8 @@ import com.atguigu.crowd.mapper.RoleMapper;
 import com.atguigu.crowd.service.api.AdminService;
 
 // 在类上标记必要的注解，Spring整合Junit
-// @RunWith(SpringJUnit4ClassRunner.class)
-// @ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml", "classpath:spring-persist-tx.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-persist-mybatis.xml", "classpath:spring-persist-tx.xml"})
 public class CrowdTest {
 	
 	@Autowired
@@ -39,6 +45,20 @@ public class CrowdTest {
 		}
 	}
 	
+	@Test
+	public void testselect() {
+		// 1.获取Logger对象，这里传入的Class对象就是当前打印日志的类
+		Logger logger = LoggerFactory.getLogger(CrowdTest.class);
+		List<Admin> adminList=new ArrayList<Admin>();
+		
+		adminList=adminMapper.selectAllAdmin();
+		for(int i=0;i<adminList.size();i++)
+		{
+			logger.error(adminList.get(i).toString());
+		}
+		
+	}
+	
 	// @Test
 	public void test() {
 		for(int i = 0; i < 238; i++) {
@@ -46,7 +66,7 @@ public class CrowdTest {
 		}
 	}
 	
-	// @Test
+	@Test
 	public void testTx() {
 		Admin admin = new Admin(null, "jerry", "123456", "杰瑞", "jerry@qq.com", null);
 		adminService.saveAdmin(admin);
